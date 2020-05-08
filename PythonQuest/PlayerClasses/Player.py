@@ -56,18 +56,18 @@ class Player(Observer):
         for tile in map.get_tiles():
             if tile.is_solid():
                 if tile.get_x() + self.__last_move >= self.__x + self.__size >= tile.get_x() and \
-                        (tile.get_y() <= self.__y + self.__size <= tile.get_y()+1000 or tile.get_y() <= self.__y + self.__size <= tile.get_y()+1000):
+                        (tile.get_y() < self.__y + self.__size/2 < tile.get_y() + 1000 or tile.get_y() < self.__y + self.__size < tile.get_y() + 1000):
                     self.__x = tile.get_x() - self.__size - 1
                 if tile.get_x() + 1000 >= self.__x >= tile.get_x() + 1000 - self.__last_move and \
-                        (tile.get_y() <= self.__y + self.__size <= tile.get_y() + 1000 or tile.get_y() <= self.__y + self.__size <= tile.get_y() + 1000):
+                        (tile.get_y() < self.__y + self.__size/2 < tile.get_y() + 1000 or tile.get_y() < self.__y + self.__size < tile.get_y() + 1000):
                     self.__x = tile.get_x() + 1000 + 1
 
                 if tile.get_y() + self.__last_move >= self.__y + self.__size >= tile.get_y() and \
-                        (tile.get_x() <= self.__x <= tile.get_x()+1000 or tile.get_x() <= self.__x + self.__size <= tile.get_x()+1000):
+                        (tile.get_x() < self.__x < tile.get_x()+1000 or tile.get_x() < self.__x + self.__size < tile.get_x()+1000):
                     self.__y = tile.get_y() - self.__size - 1
                 if tile.get_y() + 1000 >= self.__y + self.__size/2 >= tile.get_y() + 1000 - self.__last_move and \
-                        (tile.get_x() <= self.__x <= tile.get_x()+1000 or tile.get_x() <= self.__x + self.__size <= tile.get_x()+1000):
-                    self.__y = tile.get_y() + 1000 + 1 - self.__size/2
+                        (tile.get_x() < self.__x < tile.get_x()+1000 or tile.get_x() < self.__x + self.__size < tile.get_x()+1000):
+                    self.__y = tile.get_y() + 1000 - self.__size/2 + 1
 
         self.__tile_x = int(self.__x / self.__tile_size)
         self.__tile_y = int(self.__y / self.__tile_size)

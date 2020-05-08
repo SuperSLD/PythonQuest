@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\solya_0hvv578\Documents\pr\Python\PythonQuest\venv"
+VIRTUAL_ENV="C:\Users\solya_0hvv578\Documents\GitHub\PythonQuest\PythonQuest\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

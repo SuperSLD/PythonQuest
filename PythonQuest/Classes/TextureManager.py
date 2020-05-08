@@ -35,6 +35,17 @@ class TextureManager:
         self.__texture_list.append(["water_wall5", pygame.image.load('res/images/tiles/water_wall5.png')])
         self.__texture_list.append(["water_wall6", pygame.image.load('res/images/tiles/water_wall6.png')])
 
+        self.__texture_list.append(["exit_tile", pygame.image.load('res/images/tiles/exit_tile.png')])
+
+        self.__texture_list.append(["start1", pygame.image.load('res/images/start_animation/start1.png')])
+        self.__texture_list.append(["start2", pygame.image.load('res/images/start_animation/start2.png')])
+        self.__texture_list.append(["start3", pygame.image.load('res/images/start_animation/start3.png')])
+        self.__texture_list.append(["start4", pygame.image.load('res/images/start_animation/start4.png')])
+        self.__texture_list.append(["start5", pygame.image.load('res/images/start_animation/start5.png')])
+        self.__texture_list.append(["start6", pygame.image.load('res/images/start_animation/start6.png')])
+        self.__texture_list.append(["start7", pygame.image.load('res/images/start_animation/start7.png')])
+        self.__texture_list.append(["start8", pygame.image.load('res/images/start_animation/start8.png')])
+
         for v in self.__texture_list:
             v[1] = pygame.transform.scale(v[1], (tile_size, tile_size))
 

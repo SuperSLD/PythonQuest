@@ -4,8 +4,6 @@ import pygame
 
 from Classes.Screen import Screen
 from MapClasses.LevelManager import LevelManager
-from MapClasses.Map import Map
-from PlayerClasses.Player import Player
 
 
 class GameScreen(Screen):
@@ -15,30 +13,56 @@ class GameScreen(Screen):
         self.time = 0
 
         self.__level_manager = LevelManager(tile_size)
-        self.level = self.__level_manager.parse_level("level1")
+        self.level_list = ["level1", "level2"]
+        self.level = self.__level_manager.parse_level(self.level_list[0])
+        self.level_count = 0
 
         self.map = self.level.get_map()
         self.player = self.map.get_player()
 
         self.elapsed = 0.
-        self._BLACK = (3, 147, 233)
+        self._WATER = (3, 147, 233)
+        self._BLACK = (0, 0, 0)
+
         print("GameScreen init")
         return
 
     def draw(self, screen, clock, w, h):
-        seconds = self.elapsed / 1000.0
+        seconds = self.elapsed / float(1000)
         self.time += seconds
         if self.time > 60 * 10:
             self.time = 0
-        screen.fill(self._BLACK)
 
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                pygame.quit()
-                sys.exit()
-                break
-            self.player.action(event)
+        if self.map.next_level():
+            self.level_count += 1
+            print(self.level_count)
+            self.level = self.__level_manager.parse_level(self.level_list[self.level_count])
+            self.map = self.level.get_map()
+            self.player = self.map.get_player()
 
-        self.map.update(self.time, seconds, w, h)
-        self.map.draw(screen, self._texture_manager, w, h)
-        self.elapsed = clock.tick(60)
+        if self.level.get_title() is not None:
+            screen.fill(self._BLACK)
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+                    break
+            title_w = self.level.get_title().get_rect().width/2
+            screen.blit(self.level.get_title(), (w/2 - title_w, h/2-20))
+            if self.time >= 3:
+                self.level.delete_title()
+            self.elapsed = clock.tick(60)
+        else:
+            screen.fill(self._WATER)
+
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+                    break
+                self.player.action(event)
+
+            self.map.update(self.time, seconds, w, h)
+            self.map.draw(screen, self._texture_manager, w, h)
+            self.level.draw_start_animation(screen, self.time, w, h, self._tile_size, self._texture_manager)
+            self.elapsed = clock.tick(60)

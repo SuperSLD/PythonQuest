@@ -28,6 +28,7 @@ class Map(Subject):
             y += 1
 
         self.tile_size = tile_size
+        self.__next_level = False
         return
 
     def update(self, t, sec, w, h):
@@ -84,4 +85,11 @@ class Map(Subject):
                  tile.get_y() * window_k - y*window_k +
                     h/2 - self.player.get_size()*window_k/2)
             )
+        return
+
+    def next_level(self):
+        return self.__next_level
+
+    def go_to_next_level(self):
+        self.__next_level = True
         return

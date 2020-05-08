@@ -35,36 +35,39 @@ class Player(Observer):
 
     def update(self, t, map, sec):
         self.__last_move = sec * self.__speed
+        step = self.__speed*sec
+        if step > 500:
+            step = 500
         for n in self.__n:
             if n > 0:
                 if n == 1:
-                    self.__x -= self.__speed*sec
+                    self.__x -= step
                     self.__last_n = 1
                 elif n == 2:
-                    self.__y -= self.__speed*sec
+                    self.__y -= step
                     self.__last_n = 2
                 elif n == 3:
-                    self.__x += self.__speed*sec
+                    self.__x += step
                     self.__last_n = 3
                 elif n == 4:
-                    self.__y += self.__speed*sec
+                    self.__y += step
                     self.__last_n = 4
 
         for tile in map.get_tiles():
             if tile.is_solid():
                 if tile.get_x() + self.__last_move >= self.__x + self.__size >= tile.get_x() and \
-                        (tile.get_y() <= self.__y <= tile.get_y()+1000 or tile.get_y() <= self.__y + self.__size <= tile.get_y()+1000):
+                        (tile.get_y() <= self.__y + self.__size <= tile.get_y()+1000 or tile.get_y() <= self.__y + self.__size <= tile.get_y()+1000):
                     self.__x = tile.get_x() - self.__size - 1
                 if tile.get_x() + 1000 >= self.__x >= tile.get_x() + 1000 - self.__last_move and \
-                        (tile.get_y() <= self.__y <= tile.get_y() + 1000 or tile.get_y() <= self.__y + self.__size <= tile.get_y() + 1000):
+                        (tile.get_y() <= self.__y + self.__size <= tile.get_y() + 1000 or tile.get_y() <= self.__y + self.__size <= tile.get_y() + 1000):
                     self.__x = tile.get_x() + 1000 + 1
 
                 if tile.get_y() + self.__last_move >= self.__y + self.__size >= tile.get_y() and \
                         (tile.get_x() <= self.__x <= tile.get_x()+1000 or tile.get_x() <= self.__x + self.__size <= tile.get_x()+1000):
                     self.__y = tile.get_y() - self.__size - 1
-                if tile.get_y() + 1000 >= self.__y >= tile.get_y() + 1000 - self.__last_move and \
+                if tile.get_y() + 1000 >= self.__y + self.__size/2 >= tile.get_y() + 1000 - self.__last_move and \
                         (tile.get_x() <= self.__x <= tile.get_x()+1000 or tile.get_x() <= self.__x + self.__size <= tile.get_x()+1000):
-                    self.__y = tile.get_y() + 1000 + 1
+                    self.__y = tile.get_y() + 1000 + 1 - self.__size/2
 
         self.__tile_x = int(self.__x / self.__tile_size)
         self.__tile_y = int(self.__y / self.__tile_size)

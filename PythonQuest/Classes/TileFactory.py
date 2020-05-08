@@ -1,3 +1,4 @@
+from Tiles.ExitTile import ExitTile
 from Tiles.Floor import Floor
 from Tiles.Wall import Wall
 from Tiles.WallSolid import WallSolid
@@ -17,5 +18,7 @@ class TileFactory:
             return WallSolid(x, y)
         elif code == 3:
             return WaterWall(x, y)
+        elif code == 4:
+            return ExitTile(x, y)
 
         return None

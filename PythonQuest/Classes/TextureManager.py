@@ -6,6 +6,10 @@ import pygame
 
 
 class TextureManager:
+    """
+    Объект для хранения текстур и их выдачи по имени
+    """
+
     def __init__(self, tile_size):
         self.__texture_list = []
         self.__tile_size = tile_size
@@ -35,7 +39,10 @@ class TextureManager:
         self.__texture_list.append(["water_wall5", pygame.image.load('res/images/tiles/water_wall5.png')])
         self.__texture_list.append(["water_wall6", pygame.image.load('res/images/tiles/water_wall6.png')])
 
+        self.__texture_list.append(["box", pygame.image.load('res/images/tiles/box.png')])
+        self.__texture_list.append(["box_head", pygame.image.load('res/images/tiles/box_head.png')])
         self.__texture_list.append(["exit_tile", pygame.image.load('res/images/tiles/exit_tile.png')])
+        self.__texture_list.append(["chest", pygame.image.load('res/images/tiles/chest.png')])
 
         self.__texture_list.append(["start1", pygame.image.load('res/images/start_animation/start1.png')])
         self.__texture_list.append(["start2", pygame.image.load('res/images/start_animation/start2.png')])
@@ -77,6 +84,12 @@ class TextureManager:
         return
 
     def get_texture(self, name):
+        """
+        Выдача текстуры по ее названию.
+        :param name: имя текстуры
+        :return: текстура
+        (если не найдено то розово-черную сетку вернет)
+        """
         for v in self.__texture_list:
             if v[0] == name:
                 return v[1]

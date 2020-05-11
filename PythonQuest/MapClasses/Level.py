@@ -4,6 +4,10 @@ from MapClasses.Map import Map
 
 
 class Level:
+    """
+    Игровой уровень
+    """
+
     def __init__(self, text, tile_size):
         self.__map = Map(text, tile_size)
 
@@ -30,6 +34,17 @@ class Level:
         self.__title = None
 
     def draw_start_animation(self, screen, t, w, h, tile_size, tm):
+        """
+        Вырисовка старновой анимации.
+        (исчезающие квадраты черные)
+        :param screen: скрин pygame
+        :param t: врмя
+        :param w: ширина экрана
+        :param h: высота экрана
+        :param tile_size: размер плитки на экране
+        :param tm: texture manager
+        :return:
+        """
         self.count += 1
         if self._animation_run:
             step = int(self.count / 1.5)

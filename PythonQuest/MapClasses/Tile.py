@@ -2,6 +2,10 @@ from Classes.Subject_Observer import Observer
 
 
 class Tile(Observer):
+    """
+    Плитка игрового мира
+    """
+
     def __init__(self, x, y):
         self._x = x*1000
         self._y = y*1000
@@ -22,6 +26,10 @@ class Tile(Observer):
         return self._is_solid
 
     def get_drawing_order(self):
+        """
+        Получение приоритета отрисовки.
+        :return: приоритет
+        """
         return self._drawing_order
 
     def get_texture_name(self):

@@ -1,6 +1,3 @@
-"""
-Класс для хранения информации об игровом мире.
-"""
 import math
 
 from Classes.Subject_Observer import Subject
@@ -10,7 +7,7 @@ from PlayerClasses.Player import Player
 
 class Map(Subject):
     """
-    Конструктор
+    Класс для хранения информации об игровом мире.
     """
 
     def __init__(self, text, tile_size):
@@ -32,6 +29,14 @@ class Map(Subject):
         return
 
     def update(self, t, sec, w, h):
+        """
+        Обновление игрового мира.
+        :param t: время
+        :param sec: секунды с последнего кадра
+        :param w: ширина экрна
+        :param h: высота экрана
+        :return:
+        """
         self.__player.update(t, self, sec)
         for tile in self.__tiles:
             if math.fabs(tile.get_x() / 1000 - self.__player.get_x() / 1000) < w / self.tile_size / 2 + 2 \
@@ -41,6 +46,14 @@ class Map(Subject):
         return
 
     def draw(self, screen, texture_manager, w, h):
+        """
+        Отрисовка игрового мира
+        :param screen: скрин pygame
+        :param texture_manager: texture manager
+        :param w: ширина экрана
+        :param h: высота экрана
+        :return:
+        """
         window_k = self.tile_size / 1000
 
         for i in range(5):
@@ -77,6 +90,18 @@ class Map(Subject):
         return self.__tiles
 
     def draw_tile(self, screen, tile, window_k, texture_manager, x, y, w, h):
+        """
+        Вырисовка тайла
+        :param screen: скрин pygame
+        :param tile: плитка кторую мы отрисовывает
+        :param window_k: коэфициент преобразования размеров
+        :param texture_manager: texture manager
+        :param x: координата игрока
+        :param y: координата игрока
+        :param w: ширина экрана
+        :param h: высота экрана
+        :return:
+        """
         if math.fabs(tile.get_x()/1000 - x/1000) < w/self.tile_size/2 + 2 \
                 and math.fabs(tile.get_y()/1000 - y/1000) < h/self.tile_size/2 + 2:
             screen.blit(

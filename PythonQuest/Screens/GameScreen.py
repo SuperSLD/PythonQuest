@@ -7,14 +7,18 @@ from MapClasses.LevelManager import LevelManager
 
 
 class GameScreen(Screen):
+    """
+    Отрисовка графики отвечающей за игровой процесс.
+    """
+
     def __init__(self, texture_manager, tile_size, length):
         super(GameScreen, self).__init__(texture_manager, tile_size, length)
 
         self.time = 0
 
         self.__level_manager = LevelManager(tile_size)
-        self.level_list = ["level1", "level2", "level3", "level4", "level5"]
-        self.level_count = 1
+        self.level_list = ["level1", "level2", "level3", "level4", "level5", "level6", "level7", "level8" , "level9"]
+        self.level_count = 0
         self.level = self.__level_manager.parse_level(self.level_list[self.level_count])
 
         self.map = self.level.get_map()

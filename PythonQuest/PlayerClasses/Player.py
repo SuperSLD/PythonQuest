@@ -23,6 +23,11 @@ class Player(Observer):
         return
 
     def action(self, event):
+        """
+        Реакция на надатие кнопок.
+        :param event: event
+        :return:
+        """
         keys = [pygame.K_a, pygame.K_w, pygame.K_d, pygame.K_s]
         if event.type == pygame.KEYDOWN:
             for i in range(len(keys)):

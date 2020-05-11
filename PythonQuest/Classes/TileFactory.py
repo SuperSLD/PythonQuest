@@ -1,3 +1,5 @@
+from Tiles.Box import Box
+from Tiles.BoxHead import BoxHead
 from Tiles.ExitTile import ExitTile
 from Tiles.Floor import Floor
 from Tiles.Wall import Wall
@@ -20,5 +22,15 @@ class TileFactory:
             return WaterWall(x, y)
         elif code == 4:
             return ExitTile(x, y)
+        elif code == 5:
+            head = BoxHead(x, y - 1)
+            map.get_tiles().append(head)
+            map.get_tiles().append(Floor(x, y))
+            return Box(x, y, head, False)
+        elif code == 6:
+            head = BoxHead(x, y - 1)
+            map.get_tiles().append(head)
+            map.get_tiles().append(Floor(x, y))
+            return Box(x, y, head, True)
 
         return None

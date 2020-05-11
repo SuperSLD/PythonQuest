@@ -2,7 +2,6 @@ from random import randint
 
 from MapClasses.Tile import Tile
 
-
 class Wall(Tile):
     def __init__(self, x, y):
         super(Wall, self).__init__(x, y)

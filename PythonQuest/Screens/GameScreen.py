@@ -13,9 +13,9 @@ class GameScreen(Screen):
         self.time = 0
 
         self.__level_manager = LevelManager(tile_size)
-        self.level_list = ["level1", "level2"]
-        self.level = self.__level_manager.parse_level(self.level_list[0])
-        self.level_count = 0
+        self.level_list = ["level1", "level2", "level3", "level4", "level5"]
+        self.level_count = 1
+        self.level = self.__level_manager.parse_level(self.level_list[self.level_count])
 
         self.map = self.level.get_map()
         self.player = self.map.get_player()
@@ -39,6 +39,13 @@ class GameScreen(Screen):
             self.level = self.__level_manager.parse_level(self.level_list[self.level_count])
             self.map = self.level.get_map()
             self.player = self.map.get_player()
+            self.time = 0
+
+        if self.player.get_life() == 0:
+            self.level = self.__level_manager.parse_level(self.level_list[self.level_count])
+            self.map = self.level.get_map()
+            self.player = self.map.get_player()
+            self.time = 0
 
         if self.level.get_title() is not None:
             screen.fill(self._BLACK)

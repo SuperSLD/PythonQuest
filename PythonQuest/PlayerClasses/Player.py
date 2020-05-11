@@ -1,6 +1,7 @@
 import pygame
 
 from Classes.Subject_Observer import Observer
+from Tiles.Box import Box
 
 
 class Player(Observer):
@@ -18,6 +19,7 @@ class Player(Observer):
         self.__speed = 5000
         self.__last_time = 0
         self.__last_move = 0
+        self.__life = 1
         return
 
     def action(self, event):
@@ -36,8 +38,9 @@ class Player(Observer):
     def update(self, t, map, sec):
         self.__last_move = sec * self.__speed
         step = self.__speed*sec
-        if step > 500:
-            step = 500
+        if step > 200:
+            step = 0
+            self.__last_move = 0
         for n in self.__n:
             if n > 0:
                 if n == 1:
@@ -74,6 +77,9 @@ class Player(Observer):
         self.__last_time = t
         return
 
+    def get_last_move(self):
+        return self.__last_move*1.3
+
     def get_texture_name(self):
         step = int(self.__last_time*10) % 2
         position = (self.__last_n - 1)*2
@@ -90,3 +96,10 @@ class Player(Observer):
 
     def get_size(self):
         return self.__size
+
+    def get_life(self):
+        return self.__life
+
+    def take_life(self):
+        self.__life -= 1
+        return

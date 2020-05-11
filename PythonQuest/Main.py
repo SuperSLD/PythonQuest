@@ -13,8 +13,8 @@ win_w = 1280
 win_h = 700
 tile_size = int(win_h/14)
 
-screen = pygame.display.set_mode((win_w, win_h), pygame.DOUBLEBUF | pygame.FULLSCREEN)
-# screen = pygame.display.set_mode((win_w, win_h), pygame.DOUBLEBUF)
+# screen = pygame.display.set_mode((win_w, win_h), pygame.DOUBLEBUF | pygame.FULLSCREEN)
+screen = pygame.display.set_mode((win_w, win_h), pygame.DOUBLEBUF)
 clock = pygame.time.Clock()
 
 

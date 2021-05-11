@@ -6,6 +6,7 @@ class Screen:
 
     def __init__(self, texture_manager, tile_size, length):
         self._id = length
+        self._next_id = length
         self._texture_manager = texture_manager
         self._tile_size = tile_size
 
@@ -32,3 +33,6 @@ class Screen:
         :return: id
         """
         return self._id
+
+    def get_next_screen(self):
+        return

@@ -60,7 +60,7 @@ class GameScreen(Screen):
                     break
             title_w = self.level.get_title().get_rect().width/2
             screen.blit(self.level.get_title(), (w/2 - title_w, h/2-20))
-            if self.time >= 3:
+            if self.time >= 6:
                 self.level.delete_title()
             self.elapsed = clock.tick(60)
         else:
